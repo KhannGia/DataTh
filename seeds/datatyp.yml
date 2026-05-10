@@ -1,0 +1,148 @@
+version: 2
+
+seeds:
+  - name: customers
+    config:
+      column_types:
+        customer_id: "integer"
+        zip: "char(5)"
+        city: "varchar(19)"
+        signup_date: "date"
+        gender: "varchar(10)"
+        age_group: "varchar(5)"
+        acquisition_channel: "varchar(14)"
+
+  - name: geography
+    config:
+      column_types:
+        zip: "char(5)"
+        city: "varchar(19)"
+        region: "varchar(7)"
+        district: "varchar(12)"
+
+  - name: inventory
+    config:
+      column_types:
+        snapshot_date: "date"
+        product_id: "integer"
+        stock_on_hand: "integer"
+        units_received: "integer"
+        units_sold: "integer"
+        stockout_days: "smallint"
+        days_of_supply: "numeric(6,1)"
+        fill_rate: "numeric(5,4)"
+        stockout_flag: "boolean"
+        overstock_flag: "boolean"
+        reorder_flag: "boolean"
+        sell_through_rate: "numeric(5,4)"
+        product_name: "varchar(17)"
+        category: "varchar(10)"
+        segment: "varchar(11)"
+        year: "integer"
+        month: "smallint"
+
+  - name: order_items
+    config:
+      column_types:
+        order_id: "integer"
+        product_id: "integer"
+        quantity: "smallint"
+        unit_price: "numeric(7,2)"
+        discount_amount: "numeric(7,2)"
+        promo_id: "varchar(10)"
+        promo_id_2: "varchar(10)"
+
+  - name: orders
+    config:
+      column_types:
+        order_id: "integer"
+        order_date: "date"
+        customer_id: "integer"
+        zip: "char(5)"
+        order_status: "varchar(9)"
+        payment_method: "varchar(13)"
+        device_type: "varchar(7)"
+        order_source: "varchar(14)"
+
+  - name: payments
+    config:
+      column_types:
+        order_id: "integer"
+        payment_method: "varchar(13)"
+        payment_value: "numeric(8,2)"
+        installments: "smallint"
+
+  - name: products
+    config:
+      column_types:
+        product_id: "integer"
+        product_name: "varchar(17)"
+        category: "varchar(10)"
+        segment: "varchar(11)"
+        size: "varchar(2)"
+        color: "varchar(6)"
+        price: "numeric(20,15)"
+        cogs: "numeric(21,16)"
+
+  - name: promotions
+    config:
+      column_types:
+        promo_id: "varchar(10)"
+        promo_name: "varchar(18)"
+        promo_type: "varchar(10)"
+        discount_value: "numeric(3,1)"
+        start_date: "date"
+        end_date: "date"
+        applicable_category: "varchar(10)"
+        promo_channel: "varchar(12)"
+        stackable_flag: "boolean"
+        min_order_value: "integer"
+
+  - name: returns
+    config:
+      column_types:
+        return_id: "varchar(10)"
+        order_id: "integer"
+        product_id: "integer"
+        return_date: "date"
+        return_reason: "varchar(16)"
+        return_quantity: "smallint"
+        refund_amount: "numeric(8,2)"
+
+  - name: reviews
+    config:
+      column_types:
+        review_id: "varchar(11)"
+        order_id: "integer"
+        product_id: "integer"
+        customer_id: "integer"
+        review_date: "date"
+        rating: "smallint"
+        review_title: "varchar(23)"
+
+  - name: sales
+    config:
+      column_types:
+        "Date": "date"
+        "Revenue": "numeric(10,2)"
+        "COGS": "numeric(10,2)"
+
+
+  - name: shipments
+    config:
+      column_types:
+        order_id: "integer"
+        ship_date: "date"
+        delivery_date: "date"
+        shipping_fee: "numeric(4,2)"
+
+  - name: web_traffic
+    config:
+      column_types:
+        date: "date"
+        sessions: "integer"
+        unique_visitors: "integer"
+        page_views: "integer"
+        bounce_rate: "numeric(6,5)"
+        avg_session_duration_sec: "numeric(4,1)"
+        traffic_source: "varchar(14)"

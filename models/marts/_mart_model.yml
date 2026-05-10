@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: fct_promo_performance
+    description: "Bảng Data Mart tổng hợp dữ liệu giao dịch và khuyến mãi để phân tích biên lợi nhuận (Phần 2 EDA)."
+    columns:
+      - name: order_id
+        description: "Mã đơn hàng"
+        tests:
+          - not_null
+          
+      - name: product_id
+        description: "Mã sản phẩm"
+        tests:
+          - not_null
+          
+      - name: net_revenue
+        description: "Doanh thu thuần (đã trừ khuyến mãi)."
+        
+      - name: gross_profit
+        description: "Lợi nhuận gộp (Doanh thu thuần trừ đi giá vốn)."
+        
+      - name: gross_margin_pct
+        description: "Tỷ suất lợi nhuận gộp (%). Nếu âm (< 0) nghĩa là đang bán lỗ."
+        
+      - name: promo_status
+        description: "Trạng thái áp dụng mã: Stacked (Cộng dồn), Single (Đơn lẻ), No Promo (Nguyên giá)."
+
+
+
+  - name: fct_inventory_stockouts
+    description: "Bảng phân tích hiệu quả vận hành tồn kho, tính toán thiệt hại do hết hàng và vốn đọng."
+    columns:
+      - name: snapshot_date
+        description: "Ngày chụp ảnh tồn kho (cuối tháng)."
+        tests:
+          - not_null
+      - name: product_id
+        description: "Mã sản phẩm."
+        tests:
+          - not_null
+      - name: est_lost_revenue
+        description: "Ước tính doanh thu bị bỏ lỡ do sản phẩm bị hết hàng trong tháng."
+      - name: overstock_capital_value
+        description: "Giá trị vốn hàng bán đang bị ứ đọng đối với các sản phẩm được gắn cờ tồn kho quá mức."
+
+
+  - name: fct_customer_returns
+    description: "Bảng phân tích hành vi trả hàng của khách hàng, nguyên nhân và tác động tài chính."
+    columns:
+      - name: return_id
+        description: "Mã phiếu trả hàng."
+        tests:
+          - unique
+          - not_null
+      - name: return_reason
+        description: "Lý do khách hàng hoàn trả (VD: wrong_size, defective, changed_mind)."
+      - name: days_to_return
+        description: "Khoảng thời gian (số ngày) từ khi đặt hàng đến khi trả hàng. Dùng để đánh giá vòng đời hoàn trả."
+      - name: refund_amount
+        description: "Số tiền phải hoàn lại cho khách. Dùng để tính tổng thiệt hại do trả hàng."

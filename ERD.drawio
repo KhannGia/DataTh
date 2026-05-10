@@ -1,0 +1,108 @@
+<mxfile host="65bd71144e">
+    <diagram id="erd-page-1" name="ERD">
+        <mxGraphModel dx="4190" dy="2408" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="tbl_geography" value="&lt;b&gt;GEOGRAPHY&lt;/b&gt;&lt;br&gt;PK zip&lt;br&gt;city&lt;br&gt;region&lt;br&gt;district" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="-105" y="-200" width="210" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_customers" value="&lt;b&gt;CUSTOMERS&lt;/b&gt;&lt;br&gt;PK customer_id&lt;br&gt;FK zip -&amp;gt; geography.zip&lt;br&gt;city&lt;br&gt;signup_date&lt;br&gt;gender&lt;br&gt;age_group&lt;br&gt;acquisition_channel" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="-130" y="110" width="260" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_orders" value="&lt;b&gt;ORDERS&lt;/b&gt;&lt;br&gt;PK order_id&lt;br&gt;FK customer_id -&amp;gt; customers.customer_id&lt;br&gt;FK zip -&amp;gt; geography.zip&lt;br&gt;order_date&lt;br&gt;order_status&lt;br&gt;payment_method&lt;br&gt;device_type&lt;br&gt;order_source" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="40" width="300" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_order_items" value="&lt;b&gt;ORDER_ITEMS&lt;/b&gt;&lt;br&gt;PK (order_id, product_id)&lt;br&gt;FK order_id -&amp;gt; orders.order_id&lt;br&gt;FK product_id -&amp;gt; products.product_id&lt;br&gt;FK promo_id -&amp;gt; promotions.promo_id&lt;br&gt;FK promo_id_2 -&amp;gt; promotions.promo_id&lt;br&gt;quantity&lt;br&gt;unit_price&lt;br&gt;discount_amount" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="1710" y="30" width="320" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_products" value="&lt;b&gt;PRODUCTS&lt;/b&gt;&lt;br&gt;PK product_id&lt;br&gt;product_name&lt;br&gt;category&lt;br&gt;segment&lt;br&gt;size&lt;br&gt;color&lt;br&gt;price&lt;br&gt;cogs" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="1520" y="-340" width="240" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_promotions" value="&lt;b&gt;PROMOTIONS&lt;/b&gt;&lt;br&gt;PK promo_id&lt;br&gt;promo_type&lt;br&gt;discount_value&lt;br&gt;start_date&lt;br&gt;end_date&lt;br&gt;stackable_flag&lt;br&gt;min_order_value" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="2240" y="50" width="240" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_payments" value="&lt;b&gt;PAYMENTS&lt;/b&gt;&lt;br&gt;PK/FK order_id -&amp;gt; orders.order_id&lt;br&gt;payment_method&lt;br&gt;payment_value&lt;br&gt;installments" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="-320" width="260" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_shipments" value="&lt;b&gt;SHIPMENTS&lt;/b&gt;&lt;br&gt;PK/FK order_id -&amp;gt; orders.order_id&lt;br&gt;ship_date&lt;br&gt;delivery_date&lt;br&gt;shipping_fee" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="830" y="620" width="260" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_returns" value="&lt;b&gt;RETURNS&lt;/b&gt;&lt;br&gt;PK return_id&lt;br&gt;FK order_id -&amp;gt; orders.order_id&lt;br&gt;FK product_id -&amp;gt; products.product_id&lt;br&gt;return_date&lt;br&gt;return_reason&lt;br&gt;return_quantity&lt;br&gt;refund_amount" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="960" y="-330" width="280" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_reviews" value="&lt;b&gt;REVIEWS&lt;/b&gt;&lt;br&gt;PK review_id&lt;br&gt;FK order_id -&amp;gt; orders.order_id&lt;br&gt;FK product_id -&amp;gt; products.product_id&lt;br&gt;FK customer_id -&amp;gt; customers.customer_id&lt;br&gt;review_date&lt;br&gt;rating&lt;br&gt;review_title" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="440" width="280" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_inventory" value="&lt;b&gt;INVENTORY&lt;/b&gt;&lt;br&gt;Suggested PK (product_id, snapshot_date)&lt;br&gt;FK product_id -&amp;gt; products.product_id&lt;br&gt;snapshot_date&lt;br&gt;stock_on_hand&lt;br&gt;units_received&lt;br&gt;units_sold&lt;br&gt;stockout_flag&lt;br&gt;overstock_flag&lt;br&gt;reorder_flag&lt;br&gt;sell_through_rate&lt;br&gt;fill_rate" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="2060" y="-375" width="290" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_sales" value="&lt;b&gt;SALES (ANALYTICAL)&lt;/b&gt;&lt;br&gt;Date&lt;br&gt;Revenue&lt;br&gt;COGS&lt;br&gt;&lt;i&gt;No explicit FK in description&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="1550" y="640" width="260" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_web_traffic" value="&lt;b&gt;WEB_TRAFFIC (ANALYTICAL)&lt;/b&gt;&lt;br&gt;date&lt;br&gt;sessions&lt;br&gt;unique_visitors&lt;br&gt;page_views&lt;br&gt;bounce_rate&lt;br&gt;avg_session_duration_sec&lt;br&gt;traffic_source&lt;br&gt;&lt;i&gt;No explicit FK in description&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="1870" y="680" width="300" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="tbl_sample_submission" value="&lt;b&gt;SAMPLE_SUBMISSION&lt;/b&gt;&lt;br&gt;submission template&lt;br&gt;&lt;i&gt;No relationship in ER model&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="1555" y="810" width="250" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_geo_customers" value="1:N (zip)" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_geography" target="tbl_customers" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_geo_orders" value="1:N (zip)" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_geography" target="tbl_orders" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_customers_orders" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_customers" target="tbl_orders" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_orders_orderitems" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_orders" target="tbl_order_items" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_products_orderitems" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_products" target="tbl_order_items" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_promotions_orderitems_1" value="1:N (promo_id)" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;dashed=1;" parent="1" source="tbl_promotions" target="tbl_order_items" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_promotions_orderitems_2" value="1:N (promo_id_2)" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;dashed=1;" parent="1" source="tbl_promotions" target="tbl_order_items" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1230" y="380"/>
+                            <mxPoint x="1230" y="180"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_orders_payments" value="1:1" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_orders" target="tbl_payments" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_orders_shipments" value="1:0..1" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_orders" target="tbl_shipments" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_orders_returns" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_orders" target="tbl_returns" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_products_returns" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_products" target="tbl_returns" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_orders_reviews" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_orders" target="tbl_reviews" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_products_reviews" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_products" target="tbl_reviews" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1450" y="270"/>
+                            <mxPoint x="1450" y="520"/>
+                            <mxPoint x="560" y="520"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_customers_reviews" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_customers" target="tbl_reviews" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_products_inventory" value="1:N" style="endArrow=block;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" parent="1" source="tbl_products" target="tbl_inventory" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

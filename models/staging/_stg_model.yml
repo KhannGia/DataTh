@@ -1,0 +1,176 @@
+version: 2
+
+models:
+  # ==========================================
+  # 1. NHÓM LỚP MASTER (DỮ LIỆU THAM CHIẾU)
+  # ==========================================
+  - name: stg_geography
+    description: "Danh sách mã bưu chính và vùng địa lý."
+    columns:
+      - name: zip
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_products
+    description: "Danh mục sản phẩm chi tiết."
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_customers
+    description: "Thông tin định danh và nhân khẩu học của khách hàng."
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: zip
+        tests:
+          - relationships:
+              to: ref('stg_geography')
+              field: zip
+
+  - name: stg_promotions
+    description: "Các chiến dịch khuyến mãi và quy tắc giảm giá."
+    columns:
+      - name: promo_id
+        tests:
+          - unique
+          - not_null
+
+  # ==========================================
+  # 2. NHÓM LỚP TRANSACTION (GIAO DỊCH)
+  # ==========================================
+  - name: stg_orders
+    description: "Thông tin tổng quát về đơn hàng."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: zip
+        tests:
+          - relationships:
+              to: ref('stg_geography')
+              field: zip
+
+  - name: stg_order_items
+    description: "Chi tiết các sản phẩm trong từng đơn hàng."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: promo_id
+        tests:
+          - relationships:
+              to: ref('stg_promotions')
+              field: promo_id
+      - name: promo_id_2
+        tests:
+          - relationships:
+              to: ref('stg_promotions')
+              field: promo_id
+
+  - name: stg_payments
+    description: "Thông tin thanh toán (Quan hệ 1:1 với orders)."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+
+  - name: stg_shipments
+    description: "Thông tin vận chuyển đơn hàng."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+
+  - name: stg_returns
+    description: "Dữ liệu các sản phẩm bị trả lại."
+    columns:
+      - name: return_id
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        tests:
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+  - name: stg_reviews
+    description: "Đánh giá của khách hàng về sản phẩm."
+    columns:
+      - name: review_id
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        tests:
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+  # ==========================================
+  # 3. NHÓM LỚP OPERATIONAL & ANALYTICAL
+  # ==========================================
+  - name: stg_inventory
+    description: "Dữ liệu tồn kho hàng tháng."
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+  - name: stg_web_traffic
+    description: "Lưu lượng truy cập website hàng ngày."
+    columns:
+      - name: traffic_date
+        tests:
+          - not_null
+
+  - name: stg_sales
+    description: "Dữ liệu doanh thu dùng để huấn luyện mô hình dự báo."
+    columns:
+      - name: sales_date
+        tests:
+          - unique
+          - not_null
