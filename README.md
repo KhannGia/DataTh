@@ -1,6 +1,6 @@
-# Ximi Datathon 2026
+# Ximi 
 
-Repository cho bài toán Datathon 2026, kết hợp:
+Repository cho bài toán, kết hợp:
 1. **dbt** để tổ chức mô hình dữ liệu theo tầng (staging/marts)  
 2. **Streamlit** để trực quan hóa EDA và data storytelling
 
